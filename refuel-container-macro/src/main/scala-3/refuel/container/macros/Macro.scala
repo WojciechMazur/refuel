@@ -27,7 +27,7 @@ object Macro {
       case '[Option[t]] =>
         LazyMaybeInitializer.init[t].asInstanceOf[Expr[Lazy[T]]]
       case '[Iterable[t]] =>
-        LazyAllInitializer.init[t].asInstanceOf[Expr[Lazy[T]]]
+        '{ ${LazyAllInitializer.init[t]}.asInstanceOf[Lazy[T]] }
       case _ =>
         LazyForceInitializer.init[T]
     }
